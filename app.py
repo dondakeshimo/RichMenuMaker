@@ -32,7 +32,6 @@ def makeFontAwesome(icon_name, color="black", dirct="nw"):
         cmd = icon + cmd + o_size + o_background + o_font + o_point + o_gravity + o_out
 
         res = subprocess.call(cmd, shell=True)
-        print("mfa")
 
         if res == 0:
             return o_out
@@ -43,7 +42,7 @@ def makeFontAwesome(icon_name, color="black", dirct="nw"):
                 print(e)
 
 
-def insertWords(image, words, color="black", font="Meiryo", size="50"):
+def insertWords(image, words, color="black", font="Times-Roman", size="50"):
         """
         画像に文字を挿入
         色とフォントと文字サイズの指定可能
@@ -61,7 +60,6 @@ def insertWords(image, words, color="black", font="Meiryo", size="50"):
         cmd = cmd + o_point + o_gravity + o_font + o_annotate + o_fill + o_in + o_out
 
         res = subprocess.call(cmd, shell=True)
-        print("iw")
 
         if res == 0:
             return o_out
@@ -86,7 +84,6 @@ def overlayImage(bottom_img, top_img, gravity="center", geometry=(5, 5)):
     cmd += o_gravity + o_geometry + o_compose + o_composite
 
     res = subprocess.call(cmd, shell=True)
-    print("oI")
 
     if res == 0:
         return bottom_img
@@ -101,11 +98,9 @@ def makeBackground(name="menu", color="DodgerBlue"):
     name = "static/photo/richmenu/" + name + ".png"
 
     res = subprocess.call("convert -size 1200x810 xc:white {}".format(name), shell=True)
-    print(res)
 
     drawStroke(name, coords=(0, 0, 1200, 0), color=color, width=26)
     drawStroke(name, coords=(0, 810, 1200, 810), color=color, width=26)
-    print("mb")
 
     if res == 0:
         return "{}".format(name)
@@ -128,7 +123,6 @@ def drawStroke(image, coords=(0, 0, 0, 0), color="black", width=1):
     cmd = cmd + image + " " + o_color + o_width + o_draw  + image
 
     res = subprocess.call(cmd, shell=True)
-    print("dS")
 
     if res == 0:
         return image
@@ -158,9 +152,7 @@ def fontawesome():
         name = request.args.get("name")
         color = request.args.get("color")
         mb = makeBackground(name, color)
-        print(1, mb)
         overlayImage(mb, "static/photo/background.png", gravity="northwest", geometry=(0,13))
-        print(2)
 
         for dirct, geom in POSITION.items():
             fa = request.args.get("{}_icon".format(dirct))
@@ -169,7 +161,6 @@ def fontawesome():
             fa = fa.decode("unicode-escape")
             fa_color = request.args.get("{}_color".format(dirct))
             fa_words = request.args.get("{}_words".format(dirct))
-            print(fa, fa_color, fa_words)
             mfa = makeFontAwesome(fa, fa_color, dirct)
             mfa = insertWords(mfa, fa_words)
             overlayImage(mb, mfa, gravity="northwest", geometry=geom)
@@ -182,7 +173,6 @@ def fontawesome():
 @app.route("/showPhoto")
 def showPhoto():
     global mb
-    subprocess.call("rm static/photo/temp/* ", shell=True)
     return render_template("showPhoto.html", image=mb)
 
 
