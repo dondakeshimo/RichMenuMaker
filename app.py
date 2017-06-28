@@ -10,6 +10,7 @@ from flask import make_response
 app = Flask(__name__)
 app.debug = True
 
+app_PATH = os.path.dirname(__file__)
 
 
 def makeFontAwesome(icon_name, color="black"):
@@ -23,10 +24,10 @@ def makeFontAwesome(icon_name, color="black"):
         cmd = "convert "
         o_size = "-size 400x400 "
         o_background = '-background "none" -fill {} '.format(color)
-        o_font = "-font static/fonts/fontawesome-webfont.ttf "
+        o_font = "-font {}/static/fonts/fontawesome-webfont.ttf ".format(app_PATH)
         o_point = "-pointsize 200 "
         o_gravity = "-gravity center label:@- "
-        o_out = "static/photo/temp/{}.png".format(icon_name)
+        o_out = "{0}/static/photo/temp/{1}.png".format(app_PATH, icon_name)
 
         cmd = icon + cmd + o_size + o_background + o_font + o_point + o_gravity + o_out
 
@@ -97,7 +98,7 @@ def overlayImage(bottom_img, top_img, gravity="center", geometry=(5, 5)):
 
 
 def makeBackground(name="menu", color="DodgerBlue"):
-    name = "static/photo/richmenu/" + name + ".png"
+    name = "{}/static/photo/richmenu/".format(app_PATH) + name + ".png"
 
     res = subprocess.call("convert -size 1200x810 xc:white {}".format(name), shell=True)
 
@@ -157,7 +158,7 @@ def fontawesome():
         color = request.args.get("color")
         mb = makeBackground(name, color)
         print(1, mb)
-        overlayImage(mb, "static/photo/background.png", gravity="northwest", geometry=(0,13))
+        overlayImage(mb, "{}/static/photo/background.png".format(app_PATH), gravity="northwest", geometry=(0,13))
         print(2)
 
         for dirct, geom in POSITION.items():
