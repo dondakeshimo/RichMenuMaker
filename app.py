@@ -24,7 +24,7 @@ def makeFontAwesome(icon_name, color="black", dirct="nw"):
         cmd = "convert "
         o_size = "-size 400x400 "
         o_background = '-background "none" -fill {} '.format(color)
-        o_font = "-font .fonts/fontawesome-webfont.ttf "
+        o_font = "-font static/fonts/fontawesome-webfont.ttf "
         o_point = "-pointsize 200 "
         o_gravity = "-gravity center label:@- "
         o_out = "static/photo/temp/{}.png".format(dirct)
