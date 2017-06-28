@@ -42,7 +42,7 @@ def makeFontAwesome(icon_name, color="black", dirct="nw"):
                 print(e)
 
 
-def insertWords(image, words, color="black", font="Times-Roman" size="50"):
+def insertWords(image, words, color="black", font="Times-Roman", size="50"):
         """
         画像に文字を挿入
         色とフォントと文字サイズの指定可能
