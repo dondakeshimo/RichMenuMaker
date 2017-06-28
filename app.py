@@ -27,7 +27,7 @@ def makeFontAwesome(icon_name, color="black"):
         o_font = "-font static/fonts/fontawesome-webfont.ttf "
         o_point = "-pointsize 200 "
         o_gravity = "-gravity center label:@- "
-        o_out = "static/photo/temp/{1}.png".format(icon_name)
+        o_out = "static/photo/temp/{}.png".format(icon_name)
 
         cmd = icon + cmd + o_size + o_background + o_font + o_point + o_gravity + o_out
 
