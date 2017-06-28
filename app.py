@@ -120,10 +120,8 @@ def drawStroke(image, coords=(0, 0, 0, 0), color="black", width=1):
     o_draw = '-draw "line {0[0]},{0[1]} {0[2]},{0[3]}" '.format(coords)
 
     cmd = cmd + image + " " + o_color + o_width + o_draw  + image
-    print(cmd)
 
     res = subprocess.call(cmd, shell=True)
-    print(res)
 
     if res == 0:
         return image
