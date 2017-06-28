@@ -99,8 +99,10 @@ def overlayImage(bottom_img, top_img, gravity="center", geometry=(5, 5)):
 
 def makeBackground(name="menu", color="DodgerBlue"):
     name = "{}/static/photo/richmenu/".format(app_PATH) + name + ".png"
+    print(name)
 
     res = subprocess.call("convert -size 1200x810 xc:white {}".format(name), shell=True)
+    print(res)
 
     drawStroke(name, coords=(0, 0, 1200, 0), color=color, width=26)
     drawStroke(name, coords=(0, 810, 1200, 810), color=color, width=26)
