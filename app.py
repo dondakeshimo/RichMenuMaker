@@ -13,7 +13,7 @@ app.debug = True
 app_PATH = os.path.dirname(__file__)
 
 
-def makeFontAwesome(icon_name, color="black"):
+def makeFontAwesome(icon_name, color="black", dirct="nw"):
         """
         font awesome のunicodeから画像生成
         色の指定可能
@@ -27,7 +27,7 @@ def makeFontAwesome(icon_name, color="black"):
         o_font = "-font static/fonts/fontawesome-webfont.ttf "
         o_point = "-pointsize 200 "
         o_gravity = "-gravity center label:@- "
-        o_out = "static/photo/temp/{}.png".format(icon_name)
+        o_out = "static/photo/temp/{}.png".format(dirct)
 
         cmd = icon + cmd + o_size + o_background + o_font + o_point + o_gravity + o_out
 
@@ -170,7 +170,7 @@ def fontawesome():
             fa_color = request.args.get("{}_color".format(dirct))
             fa_words = request.args.get("{}_words".format(dirct))
             print(fa, fa_color, fa_words)
-            mfa = makeFontAwesome(fa, fa_color)
+            mfa = makeFontAwesome(fa, fa_color, dirct)
             mfa = insertWords(mfa, fa_words)
             overlayImage(mb, mfa, gravity="northwest", geometry=geom)
 
