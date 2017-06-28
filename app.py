@@ -156,7 +156,7 @@ def fontawesome():
         name = request.args.get("name")
         color = request.args.get("color")
         mb = makeBackground(name, color)
-        print(1)
+        print(1, mb)
         overlayImage(mb, "static/photo/background.png", gravity="northwest", geometry=(0,13))
         print(2)
 
