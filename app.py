@@ -1,6 +1,5 @@
 import os
 import subprocess
-import redis
 from flask import Flask, render_template, request
 from flask import redirect, url_for
 from flask import make_response
@@ -10,7 +9,6 @@ from flask import make_response
 app = Flask(__name__)
 app.debug = True
 
-app_PATH = os.path.dirname(__file__)
 
 
 def makeFontAwesome(icon_name, color="black", dirct="nw"):
